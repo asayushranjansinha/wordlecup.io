@@ -1,14 +1,16 @@
-import React from "react";
+import React from 'react';
 
-function RecievedMessage({ message, username }) {
+const RecievedMessage = ({ message, username, timestamp }) => {
   return (
-    <div className="inline-block px-4 py-2 rounded-lg bg-blue-300 self-start">
-      <div className="flex items-center">
-        <span className="font-medium opacity-40">{`@${username}`}</span>
+    <div className="w-fit flex items-center bg-blue-300 rounded-lg shadow-md mb-4 px-3 py-2">
+      {/* Message content */}
+      <div className="flex flex-col ml-6">
+        <span className="text-gray-700 font-medium opacity-40">{`@${username}`}</span>
+        <p className="mt-1 text-gray-700">{message}</p>
+        <span className="text-gray-500 text-sm mt-2">{timestamp}</span>
       </div>
-      <p className="ml-6">{message}</p>
     </div>
   );
-}
+};
 
 export default RecievedMessage;

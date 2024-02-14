@@ -2,30 +2,26 @@ import React, { useEffect } from "react";
 
 import ChatBox from "../components/ChatBox";
 import InputBox from "../components/InputBox";
-import socketIo from "socket.io-client";
-let count = 0;
+import useSocket from "../hooks/useSocket";
+import SentMessage from "../components/SentMessage";
+import RecievedMessage from "../components/RecievedMessage";
+
 function ChatRoom() {
-  const ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT;
-  const socket = socketIo(ENDPOINT, { transports: ["websocket"] });
+  const socket = useSocket();
   useEffect(() => {
-    socket.on("connect", () => {
-      //   alert("Connected");
-      console.log("connected"); //todo: replace with toast
-    });
-    return () => {
-      return () => {
-        socket.disconnect();
-      };
-    };
+    if (socket) {
+      socket.on("connect", () => {
+        console.log("connected");
+      });
+    }
   }, []);
-  console.log(count++);
   return (
-    <div className="flex flex-col h-screen">
-      {/* Chat Area */}
-      <ChatBox />
-      {/* Chat Input */}
-      <InputBox />
-    </div>
+    <main className="w-full h-full">
+      <div className="container mx-auto h-full flex flex-col">
+        <ChatBox />
+        <InputBox />
+      </div>
+    </main>
   );
 }
 

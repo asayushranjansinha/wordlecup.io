@@ -1,13 +1,15 @@
 import React from "react";
 
-function SentMessage({ message }) {
+const SentMessage = ({ message, timestamp }) => {
   return (
-    <div className="inline-block px-4 py-2 rounded-lg bg-green-300 self-end">
-      <p className="">
-        {message}
-      </p>
+    <div className="flex items-center bg-green-300 rounded-lg shadow-md mb-4 px-4 py-2 self-end">
+      {/* Message content */}
+      <div className="flex flex-col ml-6">
+        <p className="mt-1 text-gray-700">{message}</p>
+        <span className="text-gray-500 text-sm mt-2">{timestamp}</span>
+      </div>
     </div>
   );
-}
+};
 
 export default SentMessage;
