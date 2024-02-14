@@ -1,34 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./pages/Login.jsx";
+import AppLayout from "./Layouts/AppLayout.jsx";
+import "./index.css";
+import AuthLayout from "./Layouts/AuthLayout.jsx";
 import Home from "./pages/Home.jsx";
-import ChatRoom from "./pages/ChatRoom.jsx";
+import Chat from './pages/ChatRoom.jsx'
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <App />,
-    children: [
+    element: <AppLayout />,
+    children:[
       {
-        path: "/",
-        element: <Home />,
+        path:'',
+        element:<Home/>
       },
+      
       {
-        path: "/chat",
-        element: <ChatRoom />,
+        path:'/chat',
+        element:<Chat/>
       },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-    ],
+      
+    ]
+  },
+  {
+    path: "/login",
+    element: <AuthLayout />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <RouterProvider router={router} />
 );
