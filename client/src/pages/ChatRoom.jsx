@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import InputBox from "../components/InputBox";
 import ChatBox from "../components/ChatBox";
 import moment from "moment";
+import { toast } from "sonner";
 
 const ENDPOINT = import.meta.env.VITE_BACKEND_ENDPOINT;
 
@@ -26,15 +27,32 @@ function ChatRoom() {
     socketRef.current.emit("joined", user);
 
     socketRef.current.on("welcomeUser", (data) => {
-      console.log(data.message);
+      toast(data.message);
+      // console.log(data.message);
     });
 
     socketRef.current.on("userJoined", (data) => {
-      console.log(data.message);
+      // console.log(data);
+      const formattedTimestamp = moment(data.timestamp).format("h:mm A");
+      const newMessage = {
+        username: data.user,
+        content: data.message,
+        timestamp: formattedTimestamp,
+        type: "system",
+      };
+      setChatMessages((prev) => [...prev, newMessage]);
     });
 
     socketRef.current.on("leave", (data) => {
-      console.log(data.message);
+      // console.log(data.message);
+      const formattedTimestamp = moment(data.timestamp).format("h:mm A");
+      const newMessage = {
+        username: data.user,
+        content: data.message,
+        timestamp: formattedTimestamp,
+        type: "system",
+      };
+      setChatMessages((prev) => [...prev, newMessage]);
     });
 
     // Clean up function to disconnect the socket when the component unmounts
@@ -60,7 +78,6 @@ function ChatRoom() {
             ? "sent"
             : "received",
       };
-
       setChatMessages((prev) => [...prev, newMessage]);
     });
     return () => {
@@ -72,7 +89,6 @@ function ChatRoom() {
 
   useLayoutEffect(() => {
     if (!user) navigate("/login");
-    
   }, [user]);
 
   function sendMessage(message) {

@@ -16,7 +16,6 @@ function Home() {
           <h2 className="text-3xl font-bold text-red-800 text-center animate-pulse animation-delay-2000">
             Active Chat Room
           </h2>
-          <h3 className="text-lg text-white text-center">3 Participants</h3>
           <Link
             to="/chat"
             className="px-6 py-3 rounded-md bg-gradient-to-r from-[#DC2424] to-[#4A569D]focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 border border-solid border-gray-100 hover:shadow-md" // Modified styling

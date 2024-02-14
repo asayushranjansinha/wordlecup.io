@@ -16,9 +16,12 @@ function handleNewUserJoin(socket, joiningUsername) {
   activeUsers[socket.id] = joiningUsername;
   const adminUsername = "Admin";
   const joinMessage = `${joiningUsername} has joined`;
+  const timestamp = new Date().toISOString();
+
   socket.broadcast.emit("userJoined", {
     user: adminUsername,
     message: joinMessage,
+    timestamp,
   });
   sendWelcomeMessage(socket, joiningUsername);
 }
@@ -32,15 +35,23 @@ function handleUserDisconnect(socket) {
 function sendWelcomeMessage(socket, username) {
   const welcomeMessage = `Welcome to the Chat, ${username}!`;
   const adminUsername = "Admin";
-  socket.emit("welcomeUser", { user: adminUsername, message: welcomeMessage });
+  const timestamp = new Date().toISOString();
+
+  socket.emit("welcomeUser", {
+    user: adminUsername,
+    message: welcomeMessage,
+    timestamp,
+  });
 }
 
 function notifyUserLeave(socket, leavingUsername) {
   const adminUsername = "Admin";
   const leaveMessage = `${leavingUsername} has left the chat`;
+  const timestamp = new Date().toISOString();
   socket.broadcast.emit("leave", {
     user: adminUsername,
     message: leaveMessage,
+    timestamp,
   });
 }
 
@@ -53,7 +64,7 @@ io.on("connection", (socket) => {
 
   socket.on("message", ({ message }) => {
     const user = activeUsers[socket.id];
-    console.log(user)
+    // console.log(user);
     if (!user) {
       console.log("User not found");
       return;

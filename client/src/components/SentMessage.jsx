@@ -1,7 +1,6 @@
 import React from "react";
 
 const SentMessage = ({ message, timestamp }) => {
-  console.log(message);
   return (
     <div className="flex justify-end">
       <div className="mr-4 w-fit min-w-40 flex items-center bg-green-300 rounded-lg shadow-md mb-4 px-4 py-2">

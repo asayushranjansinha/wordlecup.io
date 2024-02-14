@@ -4,16 +4,16 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  Router,
-  RouterProvider,
-  Routes,
+  RouterProvider
 } from "react-router-dom";
-import "./index.css";
-import Login from "./pages/Login.jsx";
-import Home from "./pages/Home.jsx";
+import { Toaster } from 'sonner';
 import AppLayout from "../src/Layouts/AppLayout.jsx";
-import ChatRoom from "./pages/ChatRoom.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
+import "./index.css";
+import ChatRoom from "./pages/ChatRoom.jsx";
+import Home from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +32,7 @@ const router = createBrowserRouter(
 );
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+     <Toaster />
     <RouterProvider router={router} />
   </React.StrictMode>
 );
