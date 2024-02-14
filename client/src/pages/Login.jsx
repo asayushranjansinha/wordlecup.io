@@ -1,61 +1,69 @@
-import React, { useState } from "react";
-import { useUserStore } from "../hooks/use-user-store";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useUserStore } from "../hooks/useUserStore";
 
 function Login() {
   const [username, setUsername] = useState("");
-  const { user, login } = useUserStore();
   const navigate = useNavigate();
+  const { user, login } = useUserStore();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // console.log(username)
 
     if (username.trim() === "") {
-      alert("Please enter a username");
+      alert("Please enter a valid username");
       return;
     }
 
-    console.log("Username:", username);
     login(username);
-    console.log(user);
     setUsername("");
-    navigate("/chat");
+    navigate("/");
   };
 
+  
   return (
-    <main className="h-screen bg-blue-50 flex items-center justify-center">
-      <form
-        onSubmit={handleSubmit}
-        className="h-5/6 w-11/12 max-w-lg border border-red-800 flex flex-col justify-center items-center p-6 rounded-md shadow-lg bg-white"
+    <div className="container mx-auto flex flex-col items-center justify-center px-6 py-8 lg:py-0">
+      <Link
+        to="/"
+        className="flex items-center mb-6 text-2xl font-semibold text-gray-900"
       >
-        <h1 className="text-center text-xl font-bold mb-4">
-          Welcome to <span className="text-red-800">WordleCup</span> Realtime
-          Chat
-        </h1>
-        <div className="flex flex-col w-full mb-4">
-          <label
-            htmlFor="username"
-            className="text-gray-700 font-bold mb-2 text-center"
-          >
-            Enter Your Username
-          </label>
-          <input
-            id="username"
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
+        <img className="w-8 h-8 mr-2" src="./logo.png" alt="logo" />
+        WordleCup.io
+      </Link>
+      <div className="w-full bg-sky-300 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+          <h1 className="text-lg lg:text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+            Choose Your Username
+          </h1>
+          <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="username" className="sr-only">
+                Your username
+              </label>
+              <input
+                type="text"
+                name="username"
+                id="username"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                placeholder="Jane Doe"
+                required=""
+                autoComplete="username"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5"
+            >
+              Sign in
+            </button>
+          </form>
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Enter Chat Room
-        </button>
-      </form>
-    </main>
+      </div>
+    </div>
   );
 }
 
