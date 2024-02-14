@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../hooks/useUserStore";
 
 function Login() {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
-  const { user, login } = useUserStore();
+  const { login } = useUserStore();
 
   const handleSubmit = (event) => {
     event.preventDefault();
