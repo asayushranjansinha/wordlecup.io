@@ -1,12 +1,12 @@
 import React from "react";
 import RecievedMessage from "./RecievedMessage";
 import SentMessage from "./SentMessage";
-import ReactScrollToBottom from 'react-scroll-to-bottom'
+import ReactScrollToBottom from "react-scroll-to-bottom";
 
 const ChatBox = ({ messageList }) => {
   return (
-    <main className="w-full flex flex-grow overflow-auto bg-gray-200 shadow-md h-96">
-      <ReactScrollToBottom className="w-full flex flex-col space-y-4 p-4 pb-8">
+    <main className="w-full flex flex-grow overflow-auto h-96">
+      <ReactScrollToBottom className="w-full flex flex-col space-y-4 p-4 pb-8" >
         {messageList.map((message, idx) => {
           switch (message.type) {
             case "received":

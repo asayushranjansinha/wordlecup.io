@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import socketIOClient from "socket.io-client";
 import { useUserStore } from "../hooks/useUserStore";
 import { useNavigate } from "react-router-dom";
@@ -70,7 +70,7 @@ function ChatRoom() {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!user) navigate("/login");
     
   }, [user]);
@@ -81,7 +81,7 @@ function ChatRoom() {
 
   // function
   return (
-    <main className="w-full h-full">
+    <main className="w-full h-full bg-gradient-to-tr from-[#2193b0] to-[#6dd5ed] dark:bg-gradient-to-tr dark:from-[#000000] dark:to-[#434343]">
       <div className="container mx-auto h-full flex flex-col">
         <ChatBox messageList={chatMessages} />
         <InputBox sendMessage={sendMessage} />

@@ -14,14 +14,14 @@ function InputBox({ sendMessage }) {
     }
   }
   return (
-    <div className="flex items-center gap-2 px-4 py-2 bg-gray-200">
+    <div className="w-full flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 mb-2 rounded-lg max-w-[98vw] mx-auto">
       <input
         type="text"
         placeholder="Type your message..."
         value={messageContent}
         onChange={(e) => setMessageContent(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:shadow-outline placeholder:text-sm md:placeholder:text-md"
+        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:shadow-outline placeholder:text-sm md:placeholder:text-md dark:bg-gray-900 dark:text-white"
       />
       <button
         onClick={handleClick}
